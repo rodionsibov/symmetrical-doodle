@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,26 @@
     <link rel="stylesheet" href="./styles.css">
     <title>Document</title>
 </head>
-<body>
-    
+
+<body class="antialiased text-gray-700 bg-gray-100">
+    <div class="flex w-full h-screen justify-center items-center">
+        <div class="w-full max-w-xl">
+            <h1 class="font-bold text-5xl text-center text-indigo-700">
+                Simple Quiz
+            </h1>
+            <div class="bg-white p-12 rounded-lg shadow-lg w-full mt-8">
+                <p class="text-2xl font-bold">
+                    Here comes our question
+                </p>
+                <label for="a" class="block mt-4 border border-gray-300 rounded-lg py-2 px-6 text-lg">
+                    <input type="radio" class="hidden">
+                    Option 1
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
 </body>
+
 </html>
