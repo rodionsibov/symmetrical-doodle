@@ -1,63 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+        footer {
+            margin: 0 0 2rem;
+        }
+        i.fab:hover {
+            opacity: 0.9;
+        }
+    </style>
     <title>Simple Quiz</title>
-</head>
+  </head>
 
-<body class="antialiased text-gray-700 bg-gray-100">
+  <body class="antialiased text-gray-700 bg-gray-100">
     <div id="app" class="flex w-full h-screen justify-center items-center">
-        <div class="w-full max-w-xl p-3">
-            <h1 class="font-bold text-5xl text-center text-indigo-700">
-                Simple Quiz
-            </h1>
-            <div class="bg-white p-12 rounded-lg shadow-lg w-full mt-8">
-                <div v-if="idx < count">
-                    <p class="text-2xl font-bold">
-                        {{questions[idx]['question']}}
-                    </p>
-                    <label v-for="(answer, index) in questions[idx].answers" :key="index" :for="index"
-                        class="block mt-4 border border-gray-300 rounded-lg py-2 px-6 text-lg"
-                        :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}">
-                        <input :id="index" type="radio" class="hidden" :value="index" @change="answered($event)"
-                            :disabled="selectedAnswer != ''">
-                        {{answer}}
-                    </label>
-                    <div class="mt-6 flow-root">
-                        <button @click="nextQuestion" v-show="selectedAnswer != '' && idx < count - 1"
-                            class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2">
-                            Next &gt;
-                        </button>
-                        <button @click="showResults" v-show="selectedAnswer != '' && idx == count - 1"
-                            class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2">
-                            Finish
-                        </button>
-                    </div>
-                </div>
-                <div v-else>
-                    <h2 class="text-bold text-3xl">Results</h2>
-                    <div class="flex justify-start space-x-4 mt-6">
-                        <p>Correct Answers: <span class="text-2xl text-green-700 font-bold">{{correctAnswers}}</span>
-                        </p>
-                        <p>Wrong Answers: <span class="text-2xl text-red-700 font-bold">{{wrongAnswers}}</span></p>
-                    </div>
-                    <div class="mt-6 flow-root">
-                        <button @click="resetQuiz"
-                            class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2">
-                            Play again
-                        </button>
-                    </div>
-                </div>
+      <div class="w-full max-w-xl p-3">
+        <h1 class="font-bold text-5xl text-center text-indigo-700">
+          Simple Quiz
+        </h1>
+        <div class="bg-white p-12 rounded-lg shadow-lg w-full mt-8">
+          <div v-if="idx < count">
+            <p class="text-2xl font-bold">{{questions[idx]['question']}}</p>
+            <label
+              v-for="(answer, index) in questions[idx].answers"
+              :key="index"
+              :for="index"
+              class="block mt-4 border border-gray-300 rounded-lg py-2 px-6 text-lg"
+              :class="{'hover:bg-gray-100 cursor-pointer' : selectedAnswer == ''}, {'bg-green-200' : index == questions[idx].correctAnswer && selectedAnswer != ''}, {'bg-red-200' : selectedAnswer == index}"
+            >
+              <input
+                :id="index"
+                type="radio"
+                class="hidden"
+                :value="index"
+                @change="answered($event)"
+                :disabled="selectedAnswer != ''"
+              />
+              {{answer}}
+            </label>
+            <div class="mt-6 flow-root">
+              <button
+                @click="nextQuestion"
+                v-show="selectedAnswer != '' && idx < count - 1"
+                class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2"
+              >
+                Next &gt;
+              </button>
+              <button
+                @click="showResults"
+                v-show="selectedAnswer != '' && idx == count - 1"
+                class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2"
+              >
+                Finish
+              </button>
             </div>
+          </div>
+          <div v-else>
+            <h2 class="text-bold text-3xl">Results</h2>
+            <div class="flex justify-start space-x-4 mt-6">
+              <p>
+                Correct Answers:
+                <span class="text-2xl text-green-700 font-bold"
+                  >{{correctAnswers}}</span
+                >
+              </p>
+              <p>
+                Wrong Answers:
+                <span class="text-2xl text-red-700 font-bold"
+                  >{{wrongAnswers}}</span
+                >
+              </p>
+            </div>
+            <div class="mt-6 flow-root">
+              <button
+                @click="resetQuiz"
+                class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2"
+              >
+                Play again
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
+    <footer class="text-center">
+      <a
+        href="https://github.com/rodionsibov/symmetrical-doodle"
+        target="_blank"
+        title="Viewing existing code on GitHub. Simple Quiz App using Vue 3 and Tailwind CSS"
+        ><i class="fab fa-github fa-2x"></i></a
+      ><br />
+      <small id="year"></small>
+    </footer>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="./main.js"></script>
-</body>
-
+    <script>
+      const year = new Date().getFullYear();
+      document.querySelector("#year").textContent = year;
+    </script>
+  </body>
 </html>
